@@ -2,7 +2,7 @@
   "name": "caleb-black-react-scripts",
   "version": "1.0.13",
   "description": "Caleb Black's configuration and scripts for Create React App.",
-  "repository": "facebookincubator/create-react-app",
+  "repository": "calebblack/my-create-react-app",
   "license": "BSD-3-Clause",
   "engines": {
     "node": ">=6"
