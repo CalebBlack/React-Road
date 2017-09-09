@@ -12,6 +12,8 @@ const PORT = config.port || process.env.PORT || 8000;
 const app = express();
 // Enable Helmet for more protection
 app.use(helmet());
+// Enable Body Parser for more data
+app.use(bodyParser.json())
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
