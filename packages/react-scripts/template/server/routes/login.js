@@ -1,50 +1,52 @@
 const bcrypt = require('bcrypt');
 const response = require('../functions/response');
-const decodeAuth = require('../functions/decodeauth');
+
+const validateAuth = require('../functions/validateauth');
 function get(req,res,models) {
-  var auth = decodeAuth(req);
-  if (!auth) {
-    return response.error(res,'Improperly Formatted Auth');
-  }
-  models.User.find({username:auth.username.toLowerCase()}).then(users=>{
-    if (users[0]){
-      var user = users[0];
-      console.log(auth);
-      bcrypt.compare(auth.password, user.hash, function(err, match) {
-          if (err || match !== true) {
-            response.error(res,'Login Failure');
-          } else {
-            getToken(user,res,models);
-          }
-      });
-    } else {
-      response.error(res,"User not found.");
-    }
+  validateAuth(req,models).then(user=>{
+    getToken(user,res,models);
   }).catch(err=>{
-    response.error(res,"Internal Error");
+    console.log(err);
+    response.error(res);
   });
-  //return response.success(res,auth);
 }
 function getToken(user,res,models){
   models.Session.find({owner:user.username}).then(data=>{
-    if (data[0]){
+    if (data[0] && new Date(data[0].expires) > new Date()){
       response.success(res,sanitizeToken(data[0]));
     } else {
-      expires = new Date();
-      expires.setMonth( expires.getMonth( ) + 1 );
-      token = new models.Session({owner:user.username,expires,key:Math.random().toString(36),secret:Math.random().toString(36)});
-      console.log('NEW TOKEN',token);
-      token.save().then(data=>{
-        response.success(res,sanitizeToken(token));
-      }).catch(err=>{
-        console.log(err);
-        response.internal(res);
-      })
+      if (data[0]) {
+        data[0].remove().then(()=>{
+          genToken(user.username,models);
+        }).catch(err=>{
+          response.internal(res);
+        });
+      } else {
+        genToken(user.username,models).then(token=>{
+          response.success(res, sanitizeToken(token));
+        }).catch(err=>{
+          response.internal(res);
+        });
+      }
+
     }
   }).catch(err=>{
     console.log(err);
     response.internal(res);
   })
+}
+function genToken(username,models){
+  return new Promise((resolve,reject)=>{
+  expires = new Date();
+  expires.setMonth( expires.getMonth( ) + 1 );
+  token = new models.Session({owner:username,expires,key:Math.random().toString(36),secret:Math.random().toString(36)});
+  console.log('NEW TOKEN',token);
+  token.save().then(data=>{
+    resolve(token);
+  }).catch(err=>{
+    reject(err);
+  });
+  });
 }
 function sanitizeToken(dbtoken){
   return {owner:dbtoken.owner,created:dbtoken.created,expires:dbtoken.expires,key:dbtoken.key,secret:dbtoken.secret}
