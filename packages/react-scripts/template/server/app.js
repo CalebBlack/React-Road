@@ -10,10 +10,9 @@ const app = express();
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
-// Always return the main index.html, so react-router render the route in the client
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
-});
-
+// Serve webpage
+app.get('*', (req, res) => {res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'))});
+// Serve routes
 Router(app);
+app.disable('x-powered-by');
 app.listen(PORT,()=>{console.log('Server running on port #'+PORT);});
