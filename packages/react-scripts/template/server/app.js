@@ -1,5 +1,6 @@
 const express = require('express');
 const helmet = require('helmet');
+const path = require('path');
 //END OF PACKAGE IMPORTS
 const router = require('./router');
 const config = require('./config');
