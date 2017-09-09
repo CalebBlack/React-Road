@@ -11,6 +11,6 @@ var output = {};
 for (var schemaname in schemamap) {
   let modelName = schemaname.charAt(0).toUpperCase()+schemaname.substring(1)+'s';
   console.log('Creating Model '+modelName)
-  output[modelName] = new mongoose.Schema(modelName,schemamap[schemaname]);
+  output[modelName] = new mongoose.Schema(schemamap[schemaname]);
 }
 module.exports = output;
