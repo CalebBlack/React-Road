@@ -1,5 +1,5 @@
 /*
-This file generates your modules for you automatically, don't edit this unless you know what you are doing.
+This file generates your modules for you automatically.
 */
 var mongoose = require('mongoose');
 // END OF PACKAGE IMPORTS
