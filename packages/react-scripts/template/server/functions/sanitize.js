@@ -1,4 +1,6 @@
-sanitizers = require('./sanitizers/map');
+const sanitizers = require('./sanitizers/map');
+var validators = require('./validators/map');
+validators = validators.map((validator)=>{return function(str){if(validator(str){return str})}});
 function sanitize(query,format,customSanitizers={}){
   var output = null;
   if (sanitizers[format]) {
