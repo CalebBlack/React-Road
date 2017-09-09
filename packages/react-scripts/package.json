@@ -4,9 +4,6 @@
   "description": "Caleb Black's configuration and scripts for Create React App.",
   "repository": "calebblack/my-create-react-app",
   "license": "MIT",
-  "scripts": {
-    "server": "node server/app.js"
-  },
   "engines": {
     "node": ">=6"
   },
