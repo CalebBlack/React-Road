@@ -1,6 +1,6 @@
 const express = require('express');
 //END OF PACKAGE IMPORTS
-const Router = require('./router/index');
+const router = require('./router/index');
 const config = require('./config.js');
 //END OF LOCAL IMPORTS
 const PORT = config.port || process.env.PORT || 8000;
@@ -13,7 +13,7 @@ app.use(helmet());
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 // Serve routes
-Router(app);
+router(app);
 
 // Serve webpage
 app.get('*', (req, res) => {res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'))});
