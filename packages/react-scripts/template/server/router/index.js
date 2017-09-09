@@ -1,4 +1,4 @@
-const routemap = require('./routes/routemap.js');
+const routemap = require('./routes/map.js');
 function setupRouter(app,APIRoute="") {
   if (typeof APIRoute !== "string"){
     throw new Error("Invalid API Route, got "+APIRoute+", but a string is required.");
