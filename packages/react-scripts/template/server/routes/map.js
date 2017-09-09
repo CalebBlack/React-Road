@@ -1,2 +1,3 @@
 const user = require('./user');
-module.exports = {user}
+const login = require('./login');
+module.exports = {user,login}
