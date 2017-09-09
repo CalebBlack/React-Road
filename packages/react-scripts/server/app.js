@@ -1,5 +1,7 @@
 const express = require('express');
-//END OF IMPORTS
+//END OF PACKAGE IMPORTS
+const Router = require('./router/app');
+//END OF LOCAL IMPORTS
 const PORT = process.env.PORT || 9000;
 //END OF CONSTS
 //MAIN PROGRAM
@@ -13,4 +15,5 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
 
+Router(app);
 app.listen(PORT,()=>{console.log('Server running on port #'+PORT);});
