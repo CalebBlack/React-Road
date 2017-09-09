@@ -1,0 +1,11 @@
+{
+  "name": "react-road-server",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "*",
+    "helmet": "*"
+  },
+  "scripts": {
+    "start": "node app.js"
+  }
+}
