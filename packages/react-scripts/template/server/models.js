@@ -1,9 +1,10 @@
 /*
 This file generates your modules for you automatically.
 */
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 // END OF PACKAGE IMPORTS
 const schemamap = require('./schemas/map');
+const config = require('./config');
 // END OF LOCAL IMPORTS
 mongoose.connect(config.mongoaddress || 'mongodb://localhost/test')
 var output = {};
