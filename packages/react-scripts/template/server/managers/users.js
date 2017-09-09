@@ -44,7 +44,7 @@ function genToken(models,username){
     });
   });
 }
-function signup(models,username,email,password) {
+function signup(models,username,password,email) {
   return new Promise((resolve,reject)=>{
     genHash(userInput.password).then(hash=>{
       var user = new models.User({username:username.toLowerCase(),displayname:username,email,hash});
