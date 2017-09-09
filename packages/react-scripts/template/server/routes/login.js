@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 const response = require('../functions/response');
 const userManager = require('../managers/users');
 
