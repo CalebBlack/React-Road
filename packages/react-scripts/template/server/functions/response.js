@@ -6,4 +6,8 @@ function error(res,details,status=400){
   res.status(status);
   res.json({status:'error',details});
 }
-module.exports = {success,error};
+function internal(res,details,status=500){
+  res.status(500);
+  res.json({status:'internal error',details})
+}
+module.exports = {success,error,internal};
