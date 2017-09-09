@@ -1,7 +1,7 @@
-function get(req,res) {
+function get(req,res,models) {
   res.send('success')
 }
-function post(req,res){
+function post(req,res,models){
   res.send('success')
 }
 module.exports = {get,post}
