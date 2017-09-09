@@ -1,4 +1,4 @@
-const saltHash = require('../functions/salthash');
+const genHash = require('../functions/genhash');
 const sanitize = require('../functions/sanitize');
 const response = require('../functions/response');
 function post(req,res,models){
@@ -9,9 +9,8 @@ function post(req,res,models){
         userInput.displayname = userInput.username;
         userInput.username = userInput.username.toLowerCase();
         userInput.email = userInput.email.toLowerCase();
-        saltHash(userInput.password).then(salthash=>{
-          userInput.salt = salthash[0];
-          userInput.hash = salthash[1];
+        genHash(userInput.password).then(hash=>{
+          userInput.hash = hash;
           var user = new models.User(userData);
           user.save(err=>{
             if (err) {
