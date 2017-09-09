@@ -5,12 +5,16 @@ function sanitize(query,format){
       output = {};
       for (var queryProp in query) {
         if (format[queryProp]) {
-          output[queryProp] = sanitize(query[queryProp],format[queryProp]);
+          var check = sanitize(query[queryProp],format[queryProp]);
+          if (check) {
+            output[queryProp] = check;
+          }
         }
       }
     } else {
       output = query;
     }
   }
-  output;
+  return output;
 }
+module.exports = sanitize;
