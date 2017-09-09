@@ -1,7 +1,10 @@
-function sanitize(query,format,sanitizers={}){
+sanitizers = require('../sanitizers/map');
+function sanitize(query,format,customSanitizers={}){
   var output = null;
   if (sanitizers[format]) {
     output = sanitizers[format](query) || null;
+  } else if (customSanitizers[format]) {
+    output = customSanitizers[format](query) || null;
   } else if (typeof query === format || (typeof query === 'object' && (typeof format === 'object' || format === "array"))) {
     if (Array.isArray(query) && format === 'array'){
       output = [];
