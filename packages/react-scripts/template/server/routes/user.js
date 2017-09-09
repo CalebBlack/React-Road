@@ -1,4 +1,4 @@
-const genHash = require('../functions/genhash');
+const userManager = require('../managers/users');
 const sanitize = require('../functions/sanitize');
 const response = require('../functions/response');
 function post(req,res,models){
@@ -6,23 +6,10 @@ function post(req,res,models){
     if (req.body.email && req.body.username && req.body.password ) {
       var userInput = sanitize(req.body,{email:'email',username:'username',password:'password'});
       if (userInput.email && userInput.username && userInput.password) {
-        userInput.displayname = userInput.username;
-        userInput.username = userInput.username.toLowerCase();
-        userInput.email = userInput.email.toLowerCase();
-        genHash(userInput.password).then(hash=>{
-          userInput.hash = hash;
-          var user = new models.User(userInput);
-          user.save(err=>{
-            if (err) {
-              console.log(err);
-              response.error(res,'Creation Error');
-            } else {
-              response.success(res);
-            }
-          });
-        }).catch((err)=>{
-          console.log(err);
-          response.error(res,'Creation Error');
+        userManager.create(models,userInput.username,userInput.password,userInput.email).then(user=>{
+          response.success(res,'Account Created');
+        }).catch(err=>{
+          response.internal(res);
         });
       } else {
         response.error(res,'Invalid Parameters');
