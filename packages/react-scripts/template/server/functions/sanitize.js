@@ -1,6 +1,8 @@
-function sanitize(query,format){
+function sanitize(query,format,sanitizers={}){
   var output = null;
-  if (typeof query === format || (typeof query === 'object' && (typeof format === 'object' || format === "array"))) {
+  if (sanitizers[format]) {
+    output = sanitizers[format](query);
+  } else if (typeof query === format || (typeof query === 'object' && (typeof format === 'object' || format === "array"))) {
     if (Array.isArray(query) && format === 'array'){
       output = [];
       for (var i = 0; i < query.length; i++) {
@@ -12,7 +14,7 @@ function sanitize(query,format){
       output = {};
       for (var queryProp in query) {
         if (format[queryProp]) {
-          var check = sanitize(query[queryProp],format[queryProp]);
+          var check = sanitize(query[queryProp],format[queryProp],sanitizers);
           if (check) {
             output[queryProp] = check;
           }
