@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "server": "node server/app.js"
-  }
+  },
   "engines": {
     "node": ">=6"
   },
