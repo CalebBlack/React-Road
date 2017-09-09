@@ -3,7 +3,9 @@ var validators = require('./validators/map');
 validators = validators.map((validator)=>{return function(str){if(validator(str){return str})}});
 function sanitize(query,format,customSanitizers={}){
   var output = null;
-  if (sanitizers[format]) {
+  if (validators[format]) {
+    output = validators[format](query) || null;
+  } else if (sanitizers[format]) {
     output = sanitizers[format](query) || null;
   } else if (customSanitizers[format]) {
     output = customSanitizers[format](query) || null;
