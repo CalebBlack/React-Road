@@ -6,5 +6,5 @@ module.exports = function(req) {
   if (!auth.startsWith('Basic ')) {
     return null;
   }
-  return Buffer.from(auth.substring(6), 'base64').toString('utf8'));
+  return Buffer.from(auth.substring(6), 'base64').toString('utf8');
 }
