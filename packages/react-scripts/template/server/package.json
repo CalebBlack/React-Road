@@ -5,7 +5,8 @@
     "express": "*",
     "helmet": "*",
     "mongoose": "*",
-    "body-parser": "*"
+    "body-parser": "*",
+    "bcrypt": "*"
   },
   "scripts": {
     "start": "node app.js"
