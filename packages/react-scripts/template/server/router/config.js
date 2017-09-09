@@ -1,1 +1,1 @@
-module.exports = {methods:[],route:'/api'}
+module.exports = {methods:['get','post','delete','put','patch'],route:'api'}
