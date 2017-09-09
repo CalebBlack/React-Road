@@ -8,6 +8,6 @@ const schemamap = require('../schemas/map');
 
 var output = {};
 for (var schemaname in schemamap) {
-  output[schemaname] = new mongoose.Schema(schemamap[schemaname]);
+  output[schemaname.charAt(0).toUpperCase()+schemaname.substring(1)+'s'] = new mongoose.Schema(schemamap[schemaname]);
 }
 module.exports = output;
