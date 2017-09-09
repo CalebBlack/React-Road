@@ -1,4 +1,4 @@
-const routemap = require('');
+const routemap = require('./routemap.json');
 function setupRouter(app) {
   
 }
