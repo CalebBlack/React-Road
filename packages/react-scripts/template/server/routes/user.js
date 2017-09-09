@@ -11,7 +11,7 @@ function post(req,res,models){
         userInput.email = userInput.email.toLowerCase();
         genHash(userInput.password).then(hash=>{
           userInput.hash = hash;
-          var user = new models.User(userData);
+          var user = new models.User(userInput);
           user.save(err=>{
             if (err) {
               console.log(err);
@@ -20,8 +20,9 @@ function post(req,res,models){
               response.success(res);
             }
           });
-        }).catch(()=>{
-          response.error(res,'Creation Error')
+        }).catch((err)=>{
+          console.log(err);
+          response.error(res,'Creation Error');
         });
       } else {
         response.error(res,'Invalid Parameters');
