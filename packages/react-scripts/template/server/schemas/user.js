@@ -1,4 +1,4 @@
-{
+module.exports = {
   username: {type:String,required:true},
   displayname: {type:String,required:true},
   email: {type:String,required:true},
