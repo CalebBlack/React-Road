@@ -1,6 +1,6 @@
 const models = require('./models.js');
 const routemap = require('./routes/map.js');
-const methods = ['get','post','create','delete','put'];
+const methods = ['get','post','delete','put','patch'];
 function sendModels(functionin){
   return (req,res)=>{functionin(req,res,models)};
 }
