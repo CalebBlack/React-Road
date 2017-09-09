@@ -4,7 +4,8 @@
   "dependencies": {
     "express": "*",
     "helmet": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "body-parser": "*"
   },
   "scripts": {
     "start": "node app.js"
