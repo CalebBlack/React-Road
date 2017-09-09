@@ -1,3 +1,4 @@
 const password = require('./password');
 const email = require('./email');
-module.exports = {password,email};
+const username = require('./username);
+module.exports = {password,email,username};
