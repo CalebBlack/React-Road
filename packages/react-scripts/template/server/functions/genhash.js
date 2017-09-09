@@ -9,7 +9,7 @@ function genHash(password,saltRounds=10) {
             if (err) {
               reject(err);
             } else {
-              resolve([salt,hash]);
+              resolve(hash);
             }
         });
       }
