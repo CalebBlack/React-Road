@@ -8,6 +8,8 @@ const schemamap = require('./schemas/map');
 
 var output = {};
 for (var schemaname in schemamap) {
-  output[schemaname.charAt(0).toUpperCase()+schemaname.substring(1)+'s'] = new mongoose.Schema(schemamap[schemaname]);
+  let modelName = schemaname.charAt(0).toUpperCase()+schemaname.substring(1)+'s';
+  console.log('Creating Model '+modelName)
+  output[modelName] = new mongoose.Schema(modelName,schemamap[schemaname]);
 }
 module.exports = output;
