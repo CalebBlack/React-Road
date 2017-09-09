@@ -1,8 +1,9 @@
 const express = require('express');
 //END OF PACKAGE IMPORTS
 const Router = require('./router/index');
+const Config = require('./config.js);
 //END OF LOCAL IMPORTS
-const PORT = process.env.PORT || 9000;
+const PORT = Config.port || process.env.PORT || 8000;
 //END OF CONSTS
 //MAIN PROGRAM
 const app = express();
