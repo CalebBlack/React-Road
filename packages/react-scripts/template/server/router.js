@@ -16,8 +16,10 @@ function setupRouter(app,APIRoute="") {
     var path = route.url || routename;
     for (var i = 0; i < methods.length; i++) {
       let method = methods[i];
+      let target = APIRoute+'/'+path;
+      console.log("Registering",method,'on',target)
       if (app[method] && route[method]) {
-        app[method](APIRoute+'/'+path,sendModels(route[method]))
+        app[method](target,sendModels(route[method]))
       }
     }
   }
