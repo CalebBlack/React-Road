@@ -1,8 +1,5 @@
 const bcrypt = require('bcrypt');
 const genHash = require('../functions/genhash');
-function create(models,username,password,email){
-  var userData = {username:username.toLowerCase(),displayname:username,email};
-}
 function login(models,user){
   return new Promise((resolve,reject)=>{
     models.Session.find({owner:user.username}).then(data=>{
@@ -63,4 +60,4 @@ function signup(models,username,email,password) {
 }
 
 
-module.exports = {login,create};
+module.exports = {login,signup};
