@@ -17,7 +17,11 @@ function getToken(user,res,models){
     } else {
       if (data[0]) {
         data[0].remove().then(()=>{
-          genToken(user.username,models);
+          genToken(user.username,models).then(token=>{
+            response.success(res, sanitizeToken(token));
+          }).catch(err=>{
+            response.internal(res);
+          });
         }).catch(err=>{
           response.internal(res);
         });
