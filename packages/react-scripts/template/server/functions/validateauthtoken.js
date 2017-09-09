@@ -1,5 +1,5 @@
 const decodeAuth = require('./decodeauth');
-modules.exports = function(models,req){
+module.exports = function(models,req){
   var auth = decodeAuth(req);
   return new Promise((resolve,reject)=>{
     if (!auth) {
