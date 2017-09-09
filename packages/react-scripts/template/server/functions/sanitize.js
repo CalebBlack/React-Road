@@ -1,4 +1,4 @@
-sanitizers = require('../sanitizers/map');
+sanitizers = require('./sanitizers/map');
 function sanitize(query,format,customSanitizers={}){
   var output = null;
   if (sanitizers[format]) {
