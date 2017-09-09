@@ -1,6 +1,6 @@
 function sanitize(query,format){
   var output = null;
-  if (typeof query === typeof format) {
+  if (typeof query === format || (typeof query === 'object' && typeof format === 'object')) {
     if (typeof query === 'object') {
       output = {};
       for (var queryProp in query) {
