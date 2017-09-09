@@ -9,7 +9,6 @@ module.exports = function(req,models) {
     models.User.find({username:auth.username.toLowerCase()}).then(users=>{
       if (users[0]){
         var user = users[0];
-        console.log(auth);
         bcrypt.compare(auth.password, user.hash, function(err, match) {
           if (err || match !== true) {
               reject(err);
