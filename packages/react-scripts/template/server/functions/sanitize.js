@@ -26,3 +26,4 @@ function sanitize(query,format,sanitizers={}){
   }
   return output;
 }
+module.exports = sanitize
