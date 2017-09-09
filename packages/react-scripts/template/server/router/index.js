@@ -2,7 +2,7 @@ const models = require('./models.js');
 const routemap = require('./routes/map.js');
 const config = require('./config.js');
 
-const APIRoute = config.APIRoute || "/api";
+const APIRoute = config.route || "/api";
 const methods = config.methods || ['get','post','delete','put','patch'];
 function sendModels(functionin){
   return (req,res)=>{functionin(req,res,models)};
