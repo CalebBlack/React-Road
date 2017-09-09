@@ -17,7 +17,7 @@ function setupRouter(app,APIRoute="") {
     for (var i = 0; i < methods.length; i++) {
       let method = methods[i];
       if (app[method] && route[method]) {
-        app[method](APIRoute+path,sendModels(route[method]))
+        app[method](APIRoute+'/'+path,sendModels(route[method]))
       }
     }
   }
