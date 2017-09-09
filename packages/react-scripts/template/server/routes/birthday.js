@@ -3,7 +3,7 @@ const response = require('../functions/response');
 const find = require('../functions/findinmodel');
 
 function get(req,res,models){
-  validateAuthToken(req).then(token=>{
+  validateAuthToken(models,req).then(token=>{
     find(models.User,{username:token.owner}).then(user=>{
       response.success(res,user.created);
     }).catch(err=>{
