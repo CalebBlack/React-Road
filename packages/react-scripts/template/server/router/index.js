@@ -1,4 +1,4 @@
-const models = require('./models.js);
+const models = require('./models.js');
 const routemap = require('./routes/map.js');
 function setupRouter(app,APIRoute="") {
   if (typeof APIRoute !== "string"){
