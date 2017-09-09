@@ -1,5 +1,5 @@
 bcrypt = require('bcrypt');
-function genSaltHash(password,saltRounds=10) {
+function genHash(password,saltRounds=10) {
   return new Promise((resolve,reject)=>{
     bcrypt.genSalt(saltRounds, function(err, salt) {
       if (err) {
@@ -16,4 +16,4 @@ function genSaltHash(password,saltRounds=10) {
     });
   });
 }
-module.exports = genSaltHash;
+module.exports = genHash;
