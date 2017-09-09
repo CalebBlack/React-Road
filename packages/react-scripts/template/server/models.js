@@ -3,7 +3,7 @@ This file generates your modules for you automatically.
 */
 var mongoose = require('mongoose');
 // END OF PACKAGE IMPORTS
-const schemamap = require('../schemas/map');
+const schemamap = require('./schemas/map');
 // END OF LOCAL IMPORTS
 
 var output = {};
