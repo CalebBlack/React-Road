@@ -3,7 +3,10 @@
   "version": "1.0.2",
   "description": "Caleb Black's configuration and scripts for Create React App.",
   "repository": "calebblack/my-create-react-app",
-  "license": "BSD-3-Clause",
+  "license": "MIT",
+  "scripts": {
+    "server": "node server/app.js"
+  }
   "engines": {
     "node": ">=6"
   },
