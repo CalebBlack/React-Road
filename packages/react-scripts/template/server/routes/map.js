@@ -1,4 +1,3 @@
 const createuser = require('./createuser');
 const login = require('./login');
-const birthday = require('./birthday');
-module.exports = {birthday,createuser,login}
+module.exports = {createuser,login}
