@@ -21,7 +21,6 @@ export function logout(){
 export function login(username,password) {
   return dispatch => {
     request('get','/api/login',[username,password]).then(xhr=>{
-      console.log('LOGIN RESPONSE',xhr.response);
       var result = safeParse(xhr.response);
       if (result) {
         localStorage.token = JSON.stringify(result.details);
@@ -30,7 +29,6 @@ export function login(username,password) {
         dispatchLoginStatus(dispatch,statuses.loggedOut);
       }
     }).catch(err=>{
-      console.log('request error',err);
       dispatchLoginStatus(dispatch,statuses.loggedOut);
     });
   }
@@ -38,7 +36,6 @@ export function login(username,password) {
 export function signup(username,password,email) {
   return dispatch => {
     request('post','/api/createuser',null,{username,password,email}).then(xhr=>{
-      console.log('SIGNUP RESPONSE',xhr.response);
       var result = safeParse(xhr.response);
       if (result) {
         localStorage.token = JSON.stringify(result.details);
@@ -47,7 +44,6 @@ export function signup(username,password,email) {
         dispatchLoginStatus(dispatch,statuses.loggedOut);
       }
     }).catch(err=>{
-      console.log('request error',err);
       dispatchLoginStatus(dispatch,statuses.loggedOut);
     });
   }
