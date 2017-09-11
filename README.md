@@ -1,4 +1,4 @@
-# Caleb Black's tailored Create React App template
+React Road - tailored Create React App template
 
 Usage is simple, initialize your project with the following command:
 
