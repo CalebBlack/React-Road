@@ -19,7 +19,6 @@ const request = function (method, url, auth, content) {
       });
     };
     if (auth) {
-      console.log('request auth',auth);
       xhr.setRequestHeader('Authorization', generateAuthStrings(auth));
     }
     if (content) {
