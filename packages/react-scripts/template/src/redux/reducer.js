@@ -3,7 +3,6 @@ import * as loginStatuses from './loginstatuses';
 const initialstate = {loginStatus:loginStatuses.uninitialized};
 
 function reducer(state=initialstate, action) {
-  console.log('ACTION',action);
   switch (action.type) {
     case types.setLoginStatus:
       if (action.status === loginStatuses.loggedOut) {
