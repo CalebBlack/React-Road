@@ -1,3 +1,4 @@
 const birthday = require('./birthday');
 const validatetoken = require('./validatetoken');
-module.exports = {birthday,validatetoken};
+const logout = require('./logout');
+module.exports = {birthday,validatetoken,logout};
