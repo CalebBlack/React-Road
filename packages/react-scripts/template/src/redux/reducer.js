@@ -1,13 +1,16 @@
 import * as types from './actiontypes';
-import * as loginstatuses from './loginstatuses';
-const initialstate = {loginstatus:loginstatuses.initializing};
+import * as loginStatuses from './loginstatuses';
+const initialstate = {loginStatus:loginStatuses.uninitialized};
 
 function reducer(state=initialstate, action) {
   console.log('ACTION',action);
   switch (action.type) {
     case types.setLoginStatus:
+      if (action.status === loginStatuses.loggedOut) {
+        localStorage.token = null;
+      }
       return Object.assign({}, state, {
-        loginstatus: action.status
+        loginStatus: action.status
       });
     default:
       return state
