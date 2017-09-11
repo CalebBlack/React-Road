@@ -7,10 +7,7 @@ const methods = config.methods || ['get','post','delete','put','patch'];
 function sendModels(functionin){
   return (req,res)=>{functionin(req,res,models)};
 }
-function setupRouter(app,APIRoute="") {
-  if (typeof APIRoute !== "string"){
-    throw new Error("Invalid API Route, got "+APIRoute+", but a string is required.");
-  }
+function setupRouter(app) {
   for (var routename in routemap) {
     var route = routemap[routename];
     var path = route.url || routename;
