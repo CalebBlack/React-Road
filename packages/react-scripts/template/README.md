@@ -4,6 +4,6 @@ Setup Instructions:
 2. Compile the react app with 'npm run build'
 3. CD into the server directory with 'cd server'
 4. Install all dependiences at once with 'npm install'
-5. Start your server from the server folder with 'npm run start'
+5. Start your server from the server folder with 'npm start'
   
   
