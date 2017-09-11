@@ -59,12 +59,7 @@
   },
   "devDependencies": {
     "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react-router-dom": "*",
-    "react-autobind": "*",
-    "redux": "*",
-    "react-redux": "*",
-    "redux-thunk": "*"
+    "react-dom": "^15.5.4"
   },
   "optionalDependencies": {
     "fsevents": "1.1.2"
