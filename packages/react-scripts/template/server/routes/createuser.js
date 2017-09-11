@@ -1,24 +1,31 @@
 const userManager = require('../managers/users');
-const sanitize = require('../functions/sanitize');
 const response = require('../functions/response');
-function post(req,res,models){
+function post(req,res,models,sanitation){
   if (req.body) {
     if (req.body.email && req.body.username && req.body.password ) {
-      var userInput = sanitize(req.body,{email:'email',username:'username',password:'password'});
+      var userInput = sanitation(req.body,{email:'email',username:'username',password:'password'});
+      console.log(userInput);
       if (userInput.email && userInput.username && userInput.password) {
         userManager.signup(models,userInput.username,userInput.password,userInput.email).then(user=>{
-          response.success(res,'Account Created');
+          userManager.login(models,user).then(token=>{
+            console.log('token',sanitation(token,"token"));
+            res.success(sanitation(token,"token"));
+          }).catch(err=>{
+            console.log(err);
+            res.internal();
+          })
         }).catch(err=>{
-          response.internal(res);
+          console.log(err);
+          res.internal();
         });
       } else {
-        response.error(res,'Invalid Parameters');
+        res.error('Invalid Parameters');
       }
     } else {
-      response.error(res,'Missing Parameters');
+      res.error('Missing Parameters');
     }
   } else {
-    response.error(res,'Missing Body');
+    res.error('Missing Body');
   }
 }
 module.exports = {post}
