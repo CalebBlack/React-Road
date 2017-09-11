@@ -1,3 +1,4 @@
+import request from '../../functions/request';
 import secureRequest from '../../functions/securerequest';
 import * as statuses from '../loginstatuses';
 import {setLoginStatus} from '../actiontypes';
