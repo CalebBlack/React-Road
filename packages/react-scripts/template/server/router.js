@@ -3,6 +3,7 @@ const routemap = require('./routes/map');
 const secureroutemap = require('./routes/securemap');
 const setupResponse = require('./functions/response');
 const config = require('./config');
+const APIRoute = config.APIRoute || '/api';
 const validateAuthToken = require('./functions/validateauthtoken');
 const find = require('./functions/findinmodel');
 const sanitation = require('./functions/sanitize');
@@ -10,7 +11,7 @@ const methods = config.methods || ['get','post','delete','put','patch'];
 function sendModels(functionin){
   return (req,res)=>{functionin(req,res,models)};
 }
-function setupRouter(app,APIRoute="") {
+function setupRouter(app) {
   if (typeof APIRoute !== "string"){
     throw new Error("Invalid API Route, got "+APIRoute+", but a string is required.");
   }
