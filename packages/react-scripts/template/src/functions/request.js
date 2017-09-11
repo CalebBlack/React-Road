@@ -35,11 +35,8 @@ const request = function (method, url, auth, content) {
   });
 }
 function generateAuthStrings(strings) {
-    console.log('gen strings',strings);
     var string = strings.join(':');
-    console.log('prebasic string',string);
     var hash = window.btoa(string);
-    console.log('hash',hash);
     return 'Basic ' + hash;
 }
 export default request;
