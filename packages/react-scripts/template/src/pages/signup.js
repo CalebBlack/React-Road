@@ -33,7 +33,7 @@ class Login extends React.Component {
         <p>Password:</p>
         <input ref={ref=>{this.passwordField = ref}} type='password' id='password'/>
         <p>Confirmation:</p>
-        <input ref={ref=>{this.confirmationField = ref}} type='password' id='password'/>
+        <input ref={ref=>{this.confirmationField = ref}} type='password' id='passwordconfirmation'/>
         <button onClick={this.submitSignup}>Signup</button>
       </div>
     );
