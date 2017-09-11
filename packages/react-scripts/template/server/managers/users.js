@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 const genHash = require('../functions/genhash');
 const sanitize = require('../functions/sanitize');
 function login(models,user){
