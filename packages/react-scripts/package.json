@@ -2,7 +2,7 @@
   "name": "react-road",
   "version": "1.0.8",
   "description": "Caleb Black's configuration and scripts for Create React App.",
-  "repository": "calebblack/my-create-react-app",
+  "repository": "calebblack/React-Road",
   "license": "MIT",
   "engines": {
     "node": ">=6"
