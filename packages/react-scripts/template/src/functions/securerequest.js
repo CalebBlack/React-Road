@@ -49,4 +49,4 @@ function generateAuthStrings(strings) {
     console.log('hash',hash);
     return 'Basic ' + hash;
 }
-export default request;
+export default securerequest;
