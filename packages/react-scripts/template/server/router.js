@@ -27,7 +27,7 @@ function setupRoute(responseFunction,secure=false){
         });
       });
     } else {
-      return route(req,res);
+      return setupBasicRoute.chain(setupResponse(res)).compile(responseFunction);
     }
   }
 }
@@ -46,7 +46,7 @@ function setupRouter(app) {
       if (app[method] && route[method]) {
         let target = APIRoute+'/'+path;
         console.log("Registering",method.toUpperCase(),'on',target);
-        app[method](target,sendModels(setupResponse(setupSanitation(route[method]))));
+        app[method](target,setupRoute(route[method]));
       }
     }
   }
@@ -58,7 +58,7 @@ function setupRouter(app) {
       if (app[method] && route[method]) {
         let target = APIRoute+'/'+path;
         console.log("Securely Registering",method.toUpperCase(),'on',target);
-        app[method](target,sendModels(setupResponse(setupSanitation(secureRoute(route[method])))));
+        app[method](target,setupRoute(route[method],true));
       }
     }
   }
