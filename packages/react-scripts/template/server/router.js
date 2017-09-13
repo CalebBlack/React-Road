@@ -22,8 +22,7 @@ function setupRoute(responseFunction,secure=false){
             responder(req,res,user,token);
           }
         }).catch(err=>{
-          console.log(err);
-          res.internal();
+          res.internal(err);
         });
       });
     } else {
@@ -31,43 +30,7 @@ function setupRoute(responseFunction,secure=false){
     }
   }
 }
-function sendModels(functionin){
-  return (req,res)=>{functionin(req,res,models)};
-}
-function setupRouter(app) {
-  if (typeof APIRoute !== "string"){
-    throw new Error("Invalid API Route, got "+APIRoute+", but a string is required.");
-  }
-  for (var routename in routemap) {
-    var route = routemap[routename];
-    var path = route.url || routename;
-    for (var i = 0; i < methods.length; i++) {
-      let method = methods[i];
-      if (app[method] && route[method]) {
-        let target = APIRoute+'/'+path;
-        console.log("Registering",method.toUpperCase(),'on',target);
-        app[method](target,setupRoute(route[method]));
-      }
-    }
-  }
-  for (var routename in secureroutemap) {
-    var route = secureroutemap[routename];
-    var path = route.url || routename;
-    for (var i = 0; i < methods.length; i++) {
-      let method = methods[i];
-      if (app[method] && route[method]) {
-        let target = APIRoute+'/'+path;
-        console.log("Securely Registering",method.toUpperCase(),'on',target);
-        app[method](target,setupRoute(route[method],true));
-      }
-    }
-  }
-}
-function setupSanitation(functionin){
-  return function(req,res,models){
-    functionin(req,res,models,sanitation);
-  }
-}
+s
 function secureRoute(functionin) {
   return function(req,res,models,sanitation){
       validateAuthToken(models,req).then(token=>{
