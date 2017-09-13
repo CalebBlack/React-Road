@@ -16,7 +16,6 @@ class CompileFunction {
     }
     var output = new CompileFunction();
     output.methods = this.methods.concat(newMethods);
-    console.log('beforeafter',this,output);
     return output;
   }
   compile(toFunction){
