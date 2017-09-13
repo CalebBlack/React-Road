@@ -1,4 +1,4 @@
-function get(req,user) {
+function get(req,models,user) {
   this.success({username:user.displayname});
 }
 module.exports = {get};
