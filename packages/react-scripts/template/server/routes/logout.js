@@ -1,4 +1,4 @@
-function get(req,user,token){
+function get(req,models,user,token){
   var self = this;
   token.remove().then(()=>{
     self.success('logged out');
