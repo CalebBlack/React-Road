@@ -36,7 +36,6 @@ function genToken(models,username){
     expires = new Date();
     expires.setMonth( expires.getMonth( ) + 1 );
     token = new models.Session({owner:username,expires,key:Math.random().toString(36),secret:Math.random().toString(36)});
-    console.log('NEW TOKEN',token);
     token.save().then(data=>{
       resolve(token);
     }).catch(err=>{
