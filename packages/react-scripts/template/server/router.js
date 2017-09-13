@@ -30,19 +30,4 @@ function setupRoute(responseFunction,secure=false){
     }
   }
 }
-s
-function secureRoute(functionin) {
-  return function(req,res,models,sanitation){
-      validateAuthToken(models,req).then(token=>{
-        find(models.User,{username:token.owner}).then(user=>{
-          functionin(req,res,models,sanitation,user);
-        }).catch(err=>{
-          console.log(err)
-          res.internal();
-        });
-      }).catch(err=>{
-        res.error('Invalid Auth');
-      });
-  }
-}
 module.exports = setupRouter
