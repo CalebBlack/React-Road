@@ -33,11 +33,16 @@ function setupRoute(responseFunction,secure=false){
 function setupRoutes(app,map,secure=false){
   for (var routename in map) {
     var route = map[routename];
+    var path = route.url || '/'+routename.toLowerCase();
     for (var methodname in route) {
-      if (methods[methodname] && app[methodname]) {
-        app[methodname]()
+      if (methodname !== 'url' && methods[methodname] && app[methodname] && typeof route[methodname] === 'function') {
+        app[methodname](path,setupRoute(route[methodname],secure));
       }
     }
   }
 }
-module.exports = setupRouter
+function setupRouter(app){
+  setupRoutes(app,routemap);
+  setupRoutes(app,secureroutemap,true);
+}
+module.exports = setupRouter;
