@@ -1,4 +1,4 @@
-class CombineFunctions {
+class CompileFunctions {
   constructor(...args){
     this.methods = args.filter(functionIn=>{return typeof functionIn === 'function' && functionIn.name});
     this.compile = this.compile.bind(this);
@@ -27,4 +27,4 @@ class CombineFunctions {
     return (this.compile(args[0])(args.slice(1)));
   }
 }
-module.exports = CombineFunctions;
+module.exports = CompileFunctions;
