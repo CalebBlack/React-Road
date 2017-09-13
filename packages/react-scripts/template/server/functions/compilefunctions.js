@@ -18,7 +18,7 @@ class CompileFunctions {
   }
   compile(toFunction){
     return (...args)=>{
-      return fn.apply(this.methods.reduce(function(map, obj) {map[obj.name] = obj;return map;}, {}),args);
+      return toFunction.apply(this.methods.reduce(function(map, obj) {map[obj.name] = obj;return map;}, {}),args);
     };
   }
   run(...args){
