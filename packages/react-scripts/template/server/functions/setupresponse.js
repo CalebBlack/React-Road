@@ -28,6 +28,6 @@ function internal(res,details=null,status=500){
     console.log('###INTERNAL ERROR');
     console.log(details);
   }
-  res.json({status:'internal error',{})
+  res.json({status:'internal error',{}})
 }
 module.exports = {setup,success,error,internal};
