@@ -1,22 +1,18 @@
-function setupRoute(functionin) {
-  var out = function(req,res,models){
-    functionin(req,setupResponse(res),models)
-  }
-  Object.defineProperty(out, "name", { value: "response" });
-  return out;
-}
 function setupResponse(res){
-  output = {res};
-  output.success = function(details,status){
+  output = []
+  var outsuccess = function(details,status){
     success(output.res,details,status);
   }
-  output.error = function(details,status){
+  var outerror = function(details,status){
     error(output.res,details,status);
   }
-  output.internal = function(details,status){
+  var outinternal = function(details,status){
     internal(output.res,details,status);
   }
-  return output;
+  Object.defineProperty(outsuccess, "name", { value: "success" });
+  Object.defineProperty(outerror, "name", { value: "error" });
+  Object.defineProperty(outinternal, "name", { value: "internal" });
+  return [outsuccess,outerror,outinternal];
 }
 
 function success(res,details,status=200) {
