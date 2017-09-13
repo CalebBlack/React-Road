@@ -1,6 +1,7 @@
 class CompileFunctions {
   constructor(...args){
     this.methods = args.filter(functionIn=>{return typeof functionIn === 'function' && functionIn.name});
+
     this.compile = this.compile.bind(this);
     this.chain = this.chain.bind(this);
     this.run = this.run.bind(this);
@@ -16,11 +17,8 @@ class CompileFunctions {
     return output;
   }
   compile(toFunction){
-    var fn = toFunction;
-    var meth = this.methods;
     return (...args)=>{
-      var out = args.concat(meth);
-      return fn.apply(null,out);
+      return fn.apply(this.methods.reduce(function(map, obj) {map[obj.name] = obj;return map;}, {}),args);
     };
   }
   run(...args){
