@@ -30,4 +30,8 @@ function setupRoute(responseFunction,secure=false){
     }
   }
 }
+function setupRouter(app){
+  for (var secureroutename in secureroutemap) {
+  }
+}
 module.exports = setupRouter
