@@ -9,7 +9,7 @@ const find = require('./functions/findinmodel');
 const sanitation = require('./functions/sanitize');
 const methods = config.methods || ['get','post','delete','put','patch'];
 const CompileFunction = require('./functions/compilefunctions');
-const setupBasicRoute = function(req,res){return new CompileFunction(sanitation,models).chain};
+const setupBasicRoute = function(req,res){Function.prototype.bind.call(CombineFunctions,[sanitation,models].concat(setupResponse(res))))};
 
 function setupRoute(responseFunction,secure=false){
   var route = setupBasicRoute.chain(setupResponse(res)).compile(responseFunction);
