@@ -1,20 +1,3 @@
-function setupResponse(res,log=false){
-  var res = res;
-  var outsuccess = function(details,status){
-    success(res,details,status);
-  }
-  var outerror = function(details,status){
-    error(res,details,status);
-  }
-  var outinternal = function(details,status){
-    internal(res,details,status,log);
-  }
-  Object.defineProperty(outsuccess, "name", { value: "success" });
-  Object.defineProperty(outerror, "name", { value: "error" });
-  Object.defineProperty(outinternal, "name", { value: "internal" });
-  return [outsuccess,outerror,outinternal];
-}
-
 function success(res,details=null,status=200) {
   res.status(status);
   res.json({status:'success',details});
@@ -23,7 +6,7 @@ function error(res,details=null,status=400){
   res.status(status);
   res.json({status:'error',details});
 }
-function internal(res,details=null,status=500,log){
+function internal(res,details=null,log = false,status=500){
   res.status(status);
   if (details && log) {
     console.log('###INTERNAL ERROR');
@@ -31,4 +14,4 @@ function internal(res,details=null,status=500,log){
   }
   res.json({status:'internal error',{})
 }
-module.exports = setupRoute;
+module.exports = {success,error,internal};
