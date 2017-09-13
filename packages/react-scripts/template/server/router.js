@@ -26,7 +26,7 @@ function setupRoute(responseFunction,secure=false){
     }
   } else {
     return (req,res)=>{
-      precompileRoute(res)(req);
+      precompileRoute(res).compile(responseFunction)(req);
     }
   }
 }
