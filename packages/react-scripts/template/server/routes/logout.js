@@ -1,5 +1,5 @@
 const findInModel = require('../functions/findinmodel');
-function get(req,res,user,token){
+function get(req,user,token){
   var self = this;
   token.remove().then(()=>{
     self.success('logged out');
