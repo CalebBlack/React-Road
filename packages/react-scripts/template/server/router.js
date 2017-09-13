@@ -11,7 +11,7 @@ const methods = config.methods || ['get','post','delete','put','patch'];
 const CompileFunction = require('./functions/compilefunctions');
 const unmountedRoute = new CombineFunctions(sanitation,models);
 function precompileRoute(res) {
-  return unmountedRoute.chain.apply(unmountedRoute,setupResponse(res));
+  return unmountedRoute.chain.apply(unmountedRoute,setupResponse.setup(res));
 }
 function setupRoute(responseFunction,secure=false){
   if (secure === true) {
