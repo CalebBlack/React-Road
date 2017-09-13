@@ -25,6 +25,10 @@ function error(res,details=null,status=400){
 }
 function internal(res,details=null,status=500){
   res.status(status);
-  res.json({status:'internal error',details})
+  if (details) {
+    console.log('###INTERNAL ERROR');
+    console.log(details);
+  }
+  res.json({status:'internal error',{})
 }
 module.exports = setupRoute;
