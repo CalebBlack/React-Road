@@ -1,5 +1,5 @@
 const userManager = require('../managers/users');
-function post(req){
+function post(req,models){
   if (req.body) {
     if (req.body.email && req.body.username && req.body.password ) {
       var userInput = this.sanitize(req.body,{email:'email',username:'username',password:'password'});
