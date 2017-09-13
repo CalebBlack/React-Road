@@ -17,7 +17,7 @@ function setupRoute(responseFunction,secure=false){
     if (secure){
       validateAuthToken(models,req).then(token=>{
         find(models.User,{username:token.owner}).then(user=>{
-          setupBasicRoute.compile(responseFunction)(req,res,user,token);
+          setupBasicRoute.chain(setupResponse(res)).compile(responseFunction)(req,res,user,token);
         }).catch(err=>{
           console.log(err);
           res.internal();
