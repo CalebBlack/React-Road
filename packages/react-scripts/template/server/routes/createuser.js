@@ -1,9 +1,9 @@
 const userManager = require('../managers/users');
 const response = require('../functions/response');
-function post(req,models,sanitation){
+function post(req){
   if (req.body) {
     if (req.body.email && req.body.username && req.body.password ) {
-      var userInput = sanitation(req.body,{email:'email',username:'username',password:'password'});
+      var userInput = this.sanitize(req.body,{email:'email',username:'username',password:'password'});
       console.log(userInput);
       if (userInput.email && userInput.username && userInput.password) {
         userManager.signup(models,userInput.username,userInput.password,userInput.email).then(user=>{
