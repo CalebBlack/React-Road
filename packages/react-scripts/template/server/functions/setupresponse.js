@@ -1,4 +1,4 @@
-function setupResponse(res){
+function setupResponse(res,log=false){
   var res = res;
   var outsuccess = function(details,status){
     success(res,details,status);
@@ -7,7 +7,7 @@ function setupResponse(res){
     error(res,details,status);
   }
   var outinternal = function(details,status){
-    internal(res,details,status);
+    internal(res,details,status,log);
   }
   Object.defineProperty(outsuccess, "name", { value: "success" });
   Object.defineProperty(outerror, "name", { value: "error" });
@@ -23,9 +23,9 @@ function error(res,details=null,status=400){
   res.status(status);
   res.json({status:'error',details});
 }
-function internal(res,details=null,status=500){
+function internal(res,details=null,status=500,log){
   res.status(status);
-  if (details) {
+  if (details && log) {
     console.log('###INTERNAL ERROR');
     console.log(details);
   }
