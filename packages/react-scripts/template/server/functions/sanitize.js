@@ -32,4 +32,4 @@ function sanitize(query,format,customSanitizers={}){
   }
   return output;
 }
-module.exports = sanitize
+module.exports = sanitize;
