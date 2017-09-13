@@ -19,9 +19,11 @@ function setupRoute(responseFunction,secure=false){
       validateAuthToken(req).then(token=>{
         find(models.User,{username:token.owner}).then(user=>{
           precompileRoute(res).compile(responseFunction)(req,user,token);
+        }).catch(err=>{
+          response.internal(res,err);
         });
       }).catch(err=>{
-        response.internal(res,err);
+        response.error(res,'Invalid Token');
       });
     }
   } else {
