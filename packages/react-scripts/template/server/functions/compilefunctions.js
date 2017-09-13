@@ -7,7 +7,7 @@ class CompileFunctions {
     this.run = this.run.bind(this);
   }
   chain(...args){
-    var output = new (Function.prototype.bind.call(CombineFunctions, this.methods));
+    var output = new (Function.prototype.bind.call(CompileFunctions, this.methods));
     for (var i = 0; i < args.length; i++){
       var functionIn = args[i];
       if (functionIn && typeof functionIn === 'function' && functionIn.name && functionIn.name.toLowerCase() !== 'anonymous') {
