@@ -5,10 +5,13 @@ class CombineFunctions {
     this.chain = this.chain.bind(this);
     this.run = this.run.bind(this);
   }
-  chain(functionIn){
+  chain(...args){
     var output = new (Function.prototype.bind.call(CombineFunctions, this.methods));
-    if (typeof functionIn === 'function' && functionIn.name && functionIn.name.toLowerCase() !== 'anonymous') {
-      output.methods.push(functionIn);
+    for (var i = 0; i < args.length; i++){
+      var functionIn = args[i];
+      if (functionIn && typeof functionIn === 'function' && functionIn.name && functionIn.name.toLowerCase() !== 'anonymous') {
+        output.methods.push(functionIn);
+      }
     }
     return output;
   }
