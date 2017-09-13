@@ -8,6 +8,26 @@ const validateAuthToken = require('./functions/validateauthtoken');
 const find = require('./functions/findinmodel');
 const sanitation = require('./functions/sanitize');
 const methods = config.methods || ['get','post','delete','put','patch'];
+const CompileFunction = require('./functions/compilefunctions');
+const setupBasicRoute = new CompileFunction(sanitation,models);
+
+function setupRoute(responseFunction,secure=false){
+  var route = setupBasicRoute.compile(responseFunction);
+  return (req,res)=>{
+    if (secure){
+      validateAuthToken(models,req).then(token=>{
+        find(models.User,{username:token.owner}).then(user=>{
+          setupBasicRoute.compile(responseFunction)(req,res,user,token);
+        }).catch(err=>{
+          console.log(err);
+          res.internal();
+        });
+      });
+    } else {
+      return route(req,res);
+    }
+  }
+}
 function sendModels(functionin){
   return (req,res)=>{functionin(req,res,models)};
 }
