@@ -6,7 +6,7 @@ function post(req,models){
       if (userInput.email && userInput.username && userInput.password) {
         userManager.signup(models,userInput.username,userInput.password,userInput.email).then(user=>{
           userManager.login(models,user).then(token=>{
-            this.success(sanitation(token,"token"));
+            this.success(this.sanitize(token,"token"));
           }).catch(err=>{
             this.internal(err);
           })
