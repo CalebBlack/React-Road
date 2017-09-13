@@ -14,7 +14,7 @@ function precompileRoute(res) {
   return unmountedRoute.chain.apply(unmountedRoute,setupResponse(res));
 }
 function setupRoute(responseFunction,secure=false){
-  if (secure) {
+  if (secure === true) {
     return (req,res)=>{
       validateAuthToken(req).then(token=>{
         find(models.User,{username:token.owner}).then(user=>{
