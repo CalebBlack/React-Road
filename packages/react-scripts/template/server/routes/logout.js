@@ -1,4 +1,3 @@
-const findInModel = require('../functions/findinmodel');
 function get(req,user,token){
   var self = this;
   token.remove().then(()=>{
