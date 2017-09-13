@@ -1,6 +1,6 @@
 const userManager = require('../managers/users');
-
 const validateAuth = require('../functions/validateauth');
+
 function get(req) {
   validateAuth(req,this.models).then(user=>{
     userManager.login(this.models,user).then(token=>{
