@@ -9,7 +9,7 @@ const find = require('./functions/findinmodel');
 const sanitation = require('./functions/sanitize');
 const methods = config.methods || ['get','post','delete','put','patch'];
 const CompileFunction = require('./functions/compilefunctions');
-const unmountedRoute = new CompileFunction(sanitation,models);
+const unmountedRoute = new CompileFunction(sanitation);
 function precompileRoute(res) {
   return unmountedRoute.chain.apply(unmountedRoute,setupResponse.setup(res));
 }
@@ -18,7 +18,7 @@ function setupRoute(responseFunction,secure=false){
     return (req,res)=>{
       validateAuthToken(req).then(token=>{
         find(models.User,{username:token.owner}).then(user=>{
-          precompileRoute(res).compile(responseFunction)(req,user,token);
+          precompileRoute(res).compile(responseFunction)(req,models,user,token);
         }).catch(err=>{
           response.internal(res,err);
         });
@@ -28,7 +28,7 @@ function setupRoute(responseFunction,secure=false){
     }
   } else {
     return (req,res)=>{
-      precompileRoute(res).compile(responseFunction)(req);
+      precompileRoute(res).compile(responseFunction)(req,models);
     }
   }
 }
