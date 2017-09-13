@@ -1,4 +1,4 @@
 function get(req,res,models,sanitize,user) {
-  res.success('token validated');
+  res.success({username:user.displayname});
 }
 module.exports = {get};
