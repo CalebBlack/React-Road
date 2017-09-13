@@ -22,12 +22,12 @@ function error(res,details=null,status=400){
   res.status(status);
   res.json({status:'error',details});
 }
-function internal(res,details=null,status=500){
+function internal(res,details,status=500){
   res.status(status);
   if (details && config.debug === true) {
     console.log('###INTERNAL ERROR');
     console.log(details);
   }
-  res.json({status:'internal error',{}})
+  res.json({status:'internal error'})
 }
 module.exports = {setup,success,error,internal};
