@@ -1,4 +1,4 @@
-function get(req,res,models,sanitize,user){
-  res.success(user.created);
+function get(req,res,user){
+  this.success(user.created);
 }
 module.exports = {get};
