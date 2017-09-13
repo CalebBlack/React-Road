@@ -30,8 +30,14 @@ function setupRoute(responseFunction,secure=false){
     }
   }
 }
-function setupRouter(app){
-  for (var secureroutename in secureroutemap) {
+function setupRoutes(app,map,secure=false){
+  for (var routename in map) {
+    var route = map[routename];
+    for (var methodname in route) {
+      if (methods[methodname] && app[methodname]) {
+        app[methodname]()
+      }
+    }
   }
 }
 module.exports = setupRouter
