@@ -1,7 +1,7 @@
 const models = require('./models');
 const routemap = require('./routes/map');
 const secureroutemap = require('./routes/securemap');
-const response = require('./functions/response');
+const setupResponse = require('./functions/setupresponse');
 const config = require('./config');
 const APIRoute = config.APIRoute || '/api';
 const validateAuthToken = require('./functions/validateauthtoken');
@@ -10,22 +10,23 @@ const sanitation = require('./functions/sanitize');
 const methods = config.methods || ['get','post','delete','put','patch'];
 const CompileFunction = require('./functions/compilefunctions');
 const unmountedRoute = new CombineFunctions(sanitation,models);
-const setupBasicRoute = function(req,res){func.apply(unmountedRoute.chain, setupResponse(res))};
-
+function precompileRoute(res) {
+  return unmountedRoute.chain.apply(unmountedRoute,setupResponse(res));
+}
 function setupRoute(responseFunction,secure=false){
-  var route = setupBasicRoute.chain(setupResponse(res)).compile(responseFunction);
-  return (req,res)=>{
-    if (secure){
-      validateAuthToken(models,req).then(token=>{
+  if (secure) {
+    return (req,res)=>{
+      validateAuthToken(req).then(token=>{
         find(models.User,{username:token.owner}).then(user=>{
-            setupBasicRoute.chain(req,res,user,token);
-          }
-        }).catch(err=>{
-          res.internal(err);
+          precompileRoute(res).compile(responseFunction)(req,user,token);
         });
+      }).catch(err=>{
+        response.internal(res,err);
       });
-    } else {
-      route(req,res);
+    }
+  } else {
+    return (req,res)=>{
+      precompileRoute(res)(req);
     }
   }
 }
