@@ -1,4 +1,4 @@
-function get(req,res,user){
+function get(req,user){
   this.success(user.created);
 }
 module.exports = {get};
