@@ -1,4 +1,5 @@
-function setup(res,logInternalErrors) {
+const config = require('../config');
+function setup(res) {
   var outSuccess = function(details,status){
     success(res,details,status);
   }
