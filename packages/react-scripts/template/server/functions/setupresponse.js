@@ -7,7 +7,7 @@ function setup(res) {
     error(res,details,status);
   }
   var outInternal = function(details,status) {
-    internal(res,details,logInternalErrors,status);
+    internal(res,details,status);
   }
   Object.defineProperty(outSuccess, "name", { value: "success" });
   Object.defineProperty(outError, "name", { value: "error" });
@@ -22,9 +22,9 @@ function error(res,details=null,status=400){
   res.status(status);
   res.json({status:'error',details});
 }
-function internal(res,details=null,log = false,status=500){
+function internal(res,details=null,status=500){
   res.status(status);
-  if (details && log) {
+  if (details && config.debug === true) {
     console.log('###INTERNAL ERROR');
     console.log(details);
   }
