@@ -1,7 +1,9 @@
 function setupRoute(functionin) {
-  return function(req,res,models){
+  var out = function(req,res,models){
     functionin(req,setupResponse(res),models)
   }
+  Object.defineProperty(out, "name", { value: "response" });
+  return out;
 }
 function setupResponse(res){
   output = {res};
