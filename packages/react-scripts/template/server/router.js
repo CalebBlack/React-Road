@@ -37,7 +37,7 @@ function setupRoutes(app,map,secure=false){
     var route = map[routename];
     var path = route.url || '/'+routename.toLowerCase();
     for (var methodname in route) {
-      if (methodname !== 'url' && methods[methodname] && app[methodname] && typeof route[methodname] === 'function') {
+      if (methodname !== 'url' && methods.includes(methodname) && app[methodname] && typeof route[methodname] === 'function') {
         console.log((secure === true ? "Securely ":"")+"Registering "+methodname.toUpperCase()+" on route "+routename);
         app[methodname](path,setupRoute(route[methodname],secure));
       }
