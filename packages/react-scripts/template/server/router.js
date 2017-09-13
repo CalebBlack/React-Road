@@ -17,7 +17,10 @@ function setupRoute(responseFunction,secure=false){
     if (secure){
       validateAuthToken(models,req).then(token=>{
         find(models.User,{username:token.owner}).then(user=>{
-          setupBasicRoute.chain(setupResponse(res)).compile(responseFunction)(req,res,user,token);
+          var responder = setupBasicRoute.chain(setupResponse(res)).compile(responseFunction);
+          return function(req,res){
+            responder(req,res,user,token);
+          }
         }).catch(err=>{
           console.log(err);
           res.internal();
