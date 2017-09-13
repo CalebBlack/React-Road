@@ -1,6 +1,7 @@
 const models = require('./models');
 const routemap = require('./routes/map');
 const secureroutemap = require('./routes/securemap');
+const CombineFunctions = require('./functions/combinefunctions');
 const setupResponse = require('./functions/response');
 const config = require('./config');
 const APIRoute = config.APIRoute || '/api';
@@ -8,6 +9,9 @@ const validateAuthToken = require('./functions/validateauthtoken');
 const find = require('./functions/findinmodel');
 const sanitation = require('./functions/sanitize');
 const methods = config.methods || ['get','post','delete','put','patch'];
+
+const setupRoute = new CombineFunctions(sanitation,models);
+
 function sendModels(functionin){
   return (req,res)=>{functionin(req,res,models)};
 }
@@ -46,10 +50,10 @@ function setupSanitation(functionin){
   }
 }
 function secureRoute(functionin) {
-  return function(req,res,models,sanitation){
+  return function(req,res){
       validateAuthToken(models,req).then(token=>{
         find(models.User,{username:token.owner}).then(user=>{
-          functionin(req,res,models,sanitation,user);
+          functionin(req,res);
         }).catch(err=>{
           console.log(err)
           res.internal();
