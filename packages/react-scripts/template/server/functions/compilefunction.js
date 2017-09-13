@@ -1,4 +1,4 @@
-class CompileFunctions {
+class CompileFunction {
   constructor(...args){
     this.methods = args.filter(functionIn=>{return typeof functionIn === 'function' && functionIn.name});
 
@@ -7,13 +7,16 @@ class CompileFunctions {
     this.run = this.run.bind(this);
   }
   chain(...args){
-    var output = new (Function.prototype.bind.call(CompileFunctions, this.methods));
+    var newMethods = [];
     for (var i = 0; i < args.length; i++){
       var functionIn = args[i];
       if (functionIn && typeof functionIn === 'function' && functionIn.name && functionIn.name.toLowerCase() !== 'anonymous') {
-        output.methods.push(functionIn);
+        newMethods.push(functionIn);
       }
     }
+    var output = new CompileFunction();
+    output.methods = this.methods.concat(newMethods);
+    console.log('beforeafter',this,output);
     return output;
   }
   compile(toFunction){
@@ -25,4 +28,4 @@ class CompileFunctions {
     return (this.compile(args[0])(args.slice(1)));
   }
 }
-module.exports = CompileFunctions;
+module.exports = CompileFunction;
