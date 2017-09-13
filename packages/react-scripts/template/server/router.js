@@ -9,7 +9,7 @@ const find = require('./functions/findinmodel');
 const sanitation = require('./functions/sanitize');
 const methods = config.methods || ['get','post','delete','put','patch'];
 const CompileFunction = require('./functions/compilefunctions');
-const unmountedRoute = new CombineFunctions(sanitation,models);
+const unmountedRoute = new CompileFunction(sanitation,models);
 function precompileRoute(res) {
   return unmountedRoute.chain.apply(unmountedRoute,setupResponse.setup(res));
 }
