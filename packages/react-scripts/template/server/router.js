@@ -16,7 +16,7 @@ function precompileRoute(res) {
 function setupRoute(responseFunction,secure=false){
   if (secure === true) {
     return (req,res)=>{
-      validateAuthToken(req).then(token=>{
+      validateAuthToken(req,models).then(token=>{
         find(models.User,{username:token.owner}).then(user=>{
           precompileRoute(res).compile(responseFunction)(req,models,user,token);
         }).catch(err=>{
