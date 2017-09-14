@@ -20,10 +20,10 @@ function setupRoute(responseFunction,secure=false){
         find(models.User,{username:token.owner}).then(user=>{
           precompileRoute(res).compile(responseFunction)(req,models,user,token);
         }).catch(err=>{
-          response.internal(res,err);
+          setupResponse.internal(res,err);
         });
       }).catch(err=>{
-        response.error(res,'Invalid Token');
+        setupResponse.error(res,'Invalid Token');
       });
     }
   } else {
