@@ -11,9 +11,11 @@ class App extends Component {
     return (
       <div id='app'>
         <Header/>
-        <Switch>
-        {pages}
-        </Switch>
+        <div id='content'>
+          <Switch>
+          {pages}
+          </Switch>
+        </div>
       </div>
     );
   }
